@@ -5,5 +5,5 @@ export class Teacher {
   password: string;
   class: string;
   stream: string;
-  subject: string;
+  // subject: string;
 }

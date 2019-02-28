@@ -81,11 +81,11 @@
                           Please select a stream
                         </span>
                     </div>
-                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                    <!-- <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
                       <label for="subject">Subject</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
-                          <!-- <span class="input-group-text"><i class="fas fa-book"></i></span> -->
+                          <span class="input-group-text"><i class="fas fa-book"></i></span>
                         </div>
                         <select class="form-control" id="subject" formControlName="subject">
                           <option selected [ngValue]="null">Select</option>
@@ -95,7 +95,7 @@
                       <span class="form-text text-danger" *ngIf="!teacherForm.get('subject').valid && teacherForm.get('subject').touched">
                           Please select a subject
                         </span>
-                    </div>
+                    </div> -->
                     <div class="col-md-3 col-sm-6 offset-md-3 offset-sm-3 mt-5">
                       <button class="btn btn-warning btn-block" type="submit" *ngIf="!showLoader && mode === 'new'" [disabled]="!teacherForm.valid">
                         <i class="fa fa-save"></i>&nbsp; Submit

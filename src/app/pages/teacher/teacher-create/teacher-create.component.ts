@@ -30,8 +30,8 @@ export class TeacherCreateComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       class: [null, Validators.required],
-      stream: [null, Validators.required],
-      subject: [null, Validators.required]
+      stream: [null, Validators.required]
+      // subject: [null, Validators.required]
     });
 
     this.route.paramMap.subscribe(
@@ -92,8 +92,8 @@ export class TeacherCreateComponent implements OnInit {
       email: teacher.email,
       password: teacher.password,
       class: teacher.class,
-      stream: teacher.stream,
-      subject: teacher.subject
+      stream: teacher.stream
+      // subject: teacher.subject
     });
   }
 

@@ -4,5 +4,5 @@ export class Attendance {
   totalLectures: number;
   attendedLectures: number;
   percentage: number;
-  subject: string;
+  // subject: string;
 }

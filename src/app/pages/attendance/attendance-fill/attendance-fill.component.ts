@@ -20,7 +20,7 @@ export class AttendanceFillComponent implements OnInit {
    allStudents: Student[] = [];
    studentIndex: string;
    teacherStream: string;
-   selectedSubject: string;
+  //  selectedSubject: string;
   constructor(private router: Router, private atnService: AttendanceService,
       private alertify: AlertifyService, private _fb: FormBuilder, private studentService: StudentService,
       private teacherService: TeachersService) { }
@@ -29,7 +29,7 @@ export class AttendanceFillComponent implements OnInit {
     this.teacherService.getTeacher(localStorage.getItem('userId')).subscribe(
       ((item: Teacher) => {
         this.teacherStream = item.stream;
-        this.selectedSubject = item.subject;
+        // this.selectedSubject = item.subject;
       }),
       ((err) => {
         console.log(err);
@@ -55,17 +55,17 @@ export class AttendanceFillComponent implements OnInit {
       key: [null, Validators.required],
       month: [null, Validators.required],
       totalLectures: ['', Validators.required],
-      attendedLectures: ['', Validators.required],
-      subject: [this.selectedSubject]
+      attendedLectures: ['', Validators.required]
+      // subject: [this.selectedSubject]
     });
   }
 
   onSubmit() {
     this.showLoader = true;
     const percentage = ((this.attendanceForm.value.attendedLectures * 100) / this.attendanceForm.value.totalLectures).toFixed(2);
-    if (!this.attendanceForm.value.subject) {
-      this.attendanceForm.value.subject = this.selectedSubject;
-    }
+    // if (!this.attendanceForm.value.subject) {
+    //   this.attendanceForm.value.subject = this.selectedSubject;
+    // }
     this.atnService.setAttendanceList({... this.attendanceForm.value, percentage: percentage})
     .then(() => {
       this.showLoader = false;
@@ -87,8 +87,8 @@ export class AttendanceFillComponent implements OnInit {
       key: null,
       month: null,
       totalLectures: '',
-      attendedLectures: '',
-      subject: this.selectedSubject
+      attendedLectures: ''
+      // subject: this.selectedSubject
     });
   }
 
