@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-warning">
+  <!-- Brand -->
+  <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active">
+    <img src="../../assets/PHOC logo.png" width="100" height="30">
+  </a>
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item" *ngIf="sauthService.isLoggedIn()">
+          <a class="nav-link text-dark"><i class="fas fa-user-graduate"></i> &nbsp; Welcome </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/about-us']" routerLinkActive="router-link-active" >About</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/contact-us']" routerLinkActive="router-link-active" >Contact us</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/contactList']" routerLinkActive="router-link-active"
+        *ngIf="sauthService.isLoggedIn() && sauthService.isAdminLoggedIn()">Messages</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/studentList']" *ngIf="sauthService.isLoggedIn() && sauthService.isTeacherLoggedIn()"
+       routerLinkActive="router-link-active">Students</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/student-list-admin']" *ngIf="sauthService.isLoggedIn() && sauthService.isAdminLoggedIn()"
+         routerLinkActive="router-link-active">Students</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/teacherList']" *ngIf="sauthService.isLoggedIn() && sauthService.isAdminLoggedIn()"
+       routerLinkActive="router-link-active">Teachers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" [routerLink]="['/fillAttendance']" routerLinkActive="router-link-active"
+      *ngIf="sauthService.isLoggedIn() && sauthService.isTeacherLoggedIn()">Attendance</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/myAttendance']" routerLinkActive="router-link-active"
+         *ngIf="sauthService.isLoggedIn() && sauthService.isStudentLoggedIn()">My Attendance</a>
+      </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/login']" *ngIf="!sauthService.isLoggedIn()" routerLinkActive="router-link-active">Login</a>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" (click)="onLogout()" *ngIf="sauthService.isLoggedIn()">Logout</a>
+    </li>
+
+    <li class="nav-item dropdown mr-5" *ngIf="!sauthService.isLoggedIn()">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Login
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/login']" routerLinkActive="router-link-active">Students Login</a>
+        <a class="dropdown-item" [routerLink]="['/teachersLogin']" routerLinkActive="router-link-active">Teachers Login</a>
+        <a class="dropdown-item" [routerLink]="['/adminLogin']" routerLinkActive="router-link-active">Admin Login</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+

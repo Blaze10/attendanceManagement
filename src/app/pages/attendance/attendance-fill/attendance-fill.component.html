@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card border-0">
+            <div class="card-header bg-white">
+              <h4> <i class="far fa-calendar-alt"></i> &nbsp; Insert Attendance</h4>
+            </div>
+            <div class="card-body text-dark">
+              <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                  <div class="form-group col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" id="subject" formControlName="subject" [value]="selectedSubject" disabled>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                    <label for="studentId">Select Student</label>
+                    <select class="form-control" id="studentId" formControlName="key">
+                      <option selected [ngValue]="null">Select</option>
+                      <option *ngFor="let item of allStudents" [value]="item.$key">{{item.name}} - {{item.class}}</option>
+                    </select>
+                    <span class="form-text text-danger" *ngIf="!attendanceForm.get('key').valid && attendanceForm.get('key').touched">
+                        Please select a student
+                    </span>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                      <label for="month">Select Month</label>
+                      <select class="form-control" id="month" formControlName="month">
+                        <option selected [ngValue]="null">Select</option>
+                        <option *ngFor="let item of monthsArray" [value]="item">{{item}}</option>
+                      </select>
+                      <span class="form-text text-danger" *ngIf="!attendanceForm.get('month').valid && attendanceForm.get('month').touched">
+                          Please select a month
+                      </span>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                      <label for="totalLec">No. of total lectures</label>
+                      <input type="number" class="form-control" id="totalLec" formControlName="totalLectures">
+                      <span class="form-text text-danger" *ngIf="!attendanceForm.get('totalLectures').valid && attendanceForm.get('totalLectures').touched">
+                          Please enter the number of total lectures
+                      </span>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                      <label for="attendedLec">No. of attended lectures</label>
+                      <input type="number" class="form-control" id="attendedLec" formControlName="attendedLectures">
+                      <span class="form-text text-danger" *ngIf="!attendanceForm.get('attendedLectures').valid && attendanceForm.get('attendedLectures').touched">
+                          Please enter the number of attended lectures
+                      </span>
+                  </div>
+                  <div class="form-group col-md-2 col-sm-6 offset-md-4 offset-sm-3 mt-3">
+                      <button class="btn btn-warning btn-block" type="submit" *ngIf="!showLoader" [disabled]="!attendanceForm.valid">
+                        <i class="fa fa-save"></i>&nbsp; Submit
+                      </button>
+
+                      <div class="d-flex justify-content-center" *ngIf="showLoader">
+                          <div class="spinner-border text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="form-group col-md-2 col-sm-6 mt-3">
+                      <button class="btn btn-dark btn-block" type="submit" (click)="onCancel()">
+                        <i class="fa fa-ban"></i>&nbsp; Cancel
+                      </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

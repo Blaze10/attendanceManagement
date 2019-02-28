@@ -1,0 +1,126 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card border-0">
+            <div class="card-header">
+              <h4 style="text-align: center">Create Teacher</h4>
+            </div>
+            <div class="card-body">
+              <form  [formGroup]="teacherForm" (ngSubmit)="onSubmit()" >
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                        <label for="name">Name</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <!-- <span class="input-group-text"><i class="fas fa-user"></i></span> -->
+                          </div>
+                          <input type="text" class="form-control" id="name" formControlName="name">
+                        </div>
+                        <span class="form-text text-danger" *ngIf="!teacherForm.get('name').valid && teacherForm.get('name').touched">
+                          Please enter a valid name
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <!-- <span class="input-group-text"><i class="fas fa-at"></i></span> -->
+                          </div>
+                          <input type="text" class="form-control" id="email" formControlName="email">
+                        </div>
+                        <span class="form-text text-danger" *ngIf="!teacherForm.get('email').valid && teacherForm.get('email').touched">
+                            Please enter a valid email
+                          </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <!-- <span class="input-group-text"><i class="fas fa-key"></i></span> -->
+                          </div>
+                          <input type="password" class="form-control" id="password" formControlName="password">
+                        </div>
+                         <span class="form-text text-danger" *ngIf="teacherForm.get('password').hasError('required') && teacherForm.get('password').touched">
+                            Please enter a valid password
+                          </span>
+                          <span class="form-text text-danger" *ngIf="!teacherForm.get('password').valid && teacherForm.get('password').hasError('minlength')">
+                              Password must have minimum 6 characters
+                            </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                        <label for="class">Class</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <!-- <span class="input-group-text"><i class="fas fa-book"></i></span> -->
+                          </div>
+                          <select class="form-control" id="class" formControlName="class">
+                            <option selected [ngValue]="null">Select</option>
+                            <option value="First Year">First Year</option>
+                            <option value="Second Year">Second Year</option>
+                            <option value="Third Year">Third Year</option>
+                          </select>
+                        </div>
+                        <span class="form-text text-danger" *ngIf="!teacherForm.get('class').valid && teacherForm.get('class').touched">
+                            Please select a class
+                          </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                      <label for="Stream">Stream</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <!-- <span class="input-group-text"><i class="fas fa-book"></i></span> -->
+                        </div>
+                        <select class="form-control" id="Stream" formControlName="stream" (change)="onChangeStream($event)">
+                          <option selected [ngValue]="null">Select</option>
+                          <option value="BSc IT">BSc IT</option>
+                          <option value="BSc CS">BSc CS</option>
+                          <option value="BSc Agriculture">BSc Agriculture</option>
+                        </select>
+                      </div>
+                      <span class="form-text text-danger" *ngIf="!teacherForm.get('stream').valid && teacherForm.get('stream').touched">
+                          Please select a stream
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3 mt-2">
+                      <label for="subject">Subject</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <!-- <span class="input-group-text"><i class="fas fa-book"></i></span> -->
+                        </div>
+                        <select class="form-control" id="subject" formControlName="subject">
+                          <option selected [ngValue]="null">Select</option>
+                          <option *ngFor="let item of subjectOptions" value="{{item}}">{{item}}</option>
+                        </select>
+                      </div>
+                      <span class="form-text text-danger" *ngIf="!teacherForm.get('subject').valid && teacherForm.get('subject').touched">
+                          Please select a subject
+                        </span>
+                    </div>
+                    <div class="col-md-3 col-sm-6 offset-md-3 offset-sm-3 mt-5">
+                      <button class="btn btn-warning btn-block" type="submit" *ngIf="!showLoader && mode === 'new'" [disabled]="!teacherForm.valid">
+                        <i class="fa fa-save"></i>&nbsp; Submit
+                      </button>
+
+                      <button class="btn btn-warning btn-block" type="submit" *ngIf="!showLoader && mode === 'edit'" [disabled]="!teacherForm.valid">
+                          <i class="fa fa-save"></i>&nbsp; Edit
+                        </button>
+
+                      <div class="d-flex justify-content-center" *ngIf="showLoader">
+                          <div class="spinner-border text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                      </div>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 mt-5">
+                        <button class="btn btn-secondary btn-block" type="button" (click)="onCancel()">
+                          <i class="fa fa-ban"></i>&nbsp; Cancel
+                        </button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

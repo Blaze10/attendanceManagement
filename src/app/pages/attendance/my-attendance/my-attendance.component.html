@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+        <h3><i class="fas fa-chart-line"></i>&nbsp; {{studentName}} Attendance report</h3>
+      </div>
+    </div>
+    <br/>
+    <div class="row" *ngIf="!showLoader">
+      <div class="col-md-12 col-sm-12">
+        <div class="card border-warning">
+          <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                          <th>Sr no</th>
+                          <th>Subject</th>
+                          <th>Month</th>
+                          <th>Total Lectures</th>
+                          <th>Attended Lectures</th>
+                          <th>Percentage</th>
+                          <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of attendanceList; let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{item.subject}}</td>
+                        <td>{{item.month}}</td>
+                        <td>{{item.totalLectures}}</td>
+                        <td>{{item.attendedLectures}}</td>
+                        <td>{{item.percentage}}</td>
+                        <td *ngIf="item.percentage <= 50" class="text-danger">Defaulter</td>
+                        <td *ngIf="item.percentage > 50 && item.percentage <= 80" class="text-primary">Ok</td>
+                        <td *ngIf="item.percentage > 80" class="text-success">Excellent</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/><br/>
+    <div class="row" *ngIf="showLoader">
+        <div class="col-md-12 col-sm-12">
+            <div class="text-center">
+                <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+              </div>
+        </div>
+      </div>
+  </div>

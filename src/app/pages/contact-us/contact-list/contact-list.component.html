@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 col-sm-12" *ngIf="!showLoader">
+        <div class="card border-warning" style="height: auto; max-height: 700px; overflow: auto;">
+            <div class="card-header bg-dark text-white">
+                <h4><i class="fas fa-comments"></i>&nbsp;Messages</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert" *ngFor="let item of allMessages">
+                    <h5 class="alert-heading"><i class="fa fa-user"></i>&nbsp; &nbsp;{{item.name}}</h5>
+                    <p>{{item.message}}</p>
+                    <hr>
+                    <p class="text-right"><i class="fas fa-envelope"></i> &nbsp; {{item.email}} &nbsp;
+                      &nbsp; <i class="fas fa-phone"></i> &nbsp; {{item.phone}}</p>
+                </div>
+            </div>
+          </div>
+    </div><br/><br/>
+    <div class="col-md-12">
+        <div class="d-flex justify-content-center" *ngIf="showLoader">
+            <div class="spinner-border text-warning" style="width: 5rem; height: 5rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+          </div>
+    </div>
+  </div>
+</div>
