@@ -9,6 +9,31 @@
         </button>
       </div>
     </div>
+    <hr><br/>
+    <div class="row" *ngIf="!showLoader">
+      <div class="col-md-4 col-sm-6">
+        <label for="nameFilter">Name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="nameFilter" [(ngModel)]="searchName">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <label for="yearFilter">Year</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="yearFilter" [(ngModel)]="searchYear">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
     <br/>
     <div class="row" *ngIf="!showLoader">
       <div class="col-md-12 col-sm-12">
@@ -28,7 +53,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of studentList; let i = index;">
+                      <tr *ngFor="let item of filteredStudentList |  paginate: { id: 'pager',
+                      itemsPerPage: 9,
+                      currentPage: p }; let i = index;">
                         <td>{{i+1}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.email}}</td>
@@ -39,6 +66,15 @@
                       </tr>
                     </tbody>
                   </table>
+                  <pagination-controls  id="pager"
+                  (pageChange)="p = $event"
+                  autoHide="true"
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                  screenReaderPaginationLabel="Pagination"
+                  screenReaderPageLabel="page"
+                  screenReaderCurrentLabel="You're on page">
+                  </pagination-controls>
             </div>
           </div>
         </div>

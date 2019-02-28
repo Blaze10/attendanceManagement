@@ -32,6 +32,7 @@ import { TeacherAuthGuard } from './teacher-auth.guard';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { ContactListComponent } from './pages/contact-us/contact-list/contact-list.component';
 import { StudentListAdminComponent } from './pages/student/student-list-admin/student-list-admin.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { StudentListAdminComponent } from './pages/student/student-list-admin/st
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxPaginationModule
   ],
   providers: [
     TeachersService,

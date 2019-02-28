@@ -17,6 +17,12 @@ export class StudentListAdminComponent implements OnInit {
 
   studentList: Student[] = [];
   showLoader = false;
+  private _searchName: string;
+  private _searchYear: string;
+  private _searchStream: string;
+  filteredStudentList: Student[];
+  p = 1;
+
   constructor(private router: Router, private studentService: StudentService,
       private alertify: AlertifyService, private teacherService: TeachersService,
       private sauthService: StudentAuthService) { }
@@ -24,6 +30,33 @@ export class StudentListAdminComponent implements OnInit {
   ngOnInit() {
     this.showLoader = true;
    this.getAllStudents();
+  }
+
+  get searchName(): string {
+    return this._searchName;
+  }
+
+  get searchYear(): string {
+    return this._searchYear;
+  }
+
+  get searchStream(): string {
+    return this._searchStream;
+  }
+
+  set searchName(value: string) {
+    this._searchName = value;
+    this.filteredStudentList = this.filterName(value);
+  }
+
+  set searchYear(value: string) {
+    this._searchYear = value;
+    this.filteredStudentList = this.filterYear(value);
+  }
+
+  set searchStream(value: string) {
+    this._searchStream = value;
+    this.filteredStudentList = this.filterStream(value);
   }
 
   getAllStudents() {
@@ -37,6 +70,7 @@ export class StudentListAdminComponent implements OnInit {
           if (this.sauthService.isAdminLoggedIn()) {
             this.studentList.push(x as Student);
           }
+          this.filteredStudentList = this.studentList;
         });
       }),
       ((err) => {
@@ -44,6 +78,25 @@ export class StudentListAdminComponent implements OnInit {
         this.alertify.error('Some error occured');
       })
     );
+  }
+
+  filterName(searchName: string) {
+    return this.studentList.filter(list =>
+      list.name.toLowerCase().indexOf(searchName.toLowerCase()) !== -1);
+  }
+
+  filterYear(searchYear: string) {
+    return this.studentList.filter(list =>
+      list.class.toLowerCase().indexOf(searchYear.toLowerCase()) !== -1);
+  }
+
+  filterStream(searchYear: string) {
+    // if(searchYear === null) {
+    //   return this.studentList;
+    // }
+
+    return this.studentList.filter(list =>
+      list.stream.toLowerCase().indexOf(searchYear.toLowerCase()) !== -1);
   }
 
 }

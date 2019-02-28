@@ -17,6 +17,11 @@ export class StudentListComponent implements OnInit {
   studentList: Student[] = [];
   showLoader = false;
   teacherStream: string;
+  private _searchName: string;
+  private _searchYear: string;
+  filteredStudentList: Student[];
+  p = 1;
+
   constructor(private router: Router, private studentService: StudentService,
       private alertify: AlertifyService, private teacherService: TeachersService,
       private sauthService: StudentAuthService) { }
@@ -34,6 +39,25 @@ export class StudentListComponent implements OnInit {
    this.getAllStudents();
   }
 
+  get searchName(): string {
+    return this._searchName;
+  }
+
+  get searchYear(): string {
+    return this._searchYear;
+  }
+
+  set searchName(value: string) {
+    this._searchName = value;
+    this.filteredStudentList = this.filterName(value);
+  }
+
+  set searchYear(value: string) {
+    this._searchYear = value;
+    this.filteredStudentList = this.filterYear(value);
+  }
+
+
   getAllStudents() {
     this.studentService.getStudentList().snapshotChanges().subscribe(
       ((item) => {
@@ -50,6 +74,7 @@ export class StudentListComponent implements OnInit {
             }
           }
         });
+        this.filteredStudentList = this.studentList;
       }),
       ((err) => {
         this.showLoader = false;
@@ -75,4 +100,15 @@ export class StudentListComponent implements OnInit {
       this.alertify.error('Some error occured');
     });
   }
+
+  filterName(searchName: string) {
+    return this.studentList.filter(list =>
+      list.name.toLowerCase().indexOf(searchName.toLowerCase()) !== -1);
+  }
+
+  filterYear(searchYear: string) {
+    return this.studentList.filter(list =>
+      list.class.toLowerCase().indexOf(searchYear.toLowerCase()) !== -1);
+  }
+
 }
