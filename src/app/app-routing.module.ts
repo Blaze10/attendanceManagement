@@ -19,6 +19,7 @@ import { StudentAuthGuard } from './student-auth.guard';
 import { TeacherAuthGuard } from './teacher-auth.guard';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { StudentListAdminComponent } from './pages/student/student-list-admin/student-list-admin.component';
+import { AttendanceDefaultersComponent } from './pages/attendance/attendance-defaulters/attendance-defaulters.component';
 
 
 const appRoutes: Routes = [
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
       {path: 'studentCreate', component: StudentCreateComponent},
       {path: 'studentCreate/:id', component: StudentCreateComponent},
       {path: 'fillAttendance', component: AttendanceFillComponent},
+      {path: 'defaulters', component: AttendanceDefaultersComponent}
     ]
   }
 ];

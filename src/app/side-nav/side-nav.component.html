@@ -26,6 +26,10 @@
        routerLinkActive="router-link-active">Students</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/defaulters']" *ngIf="sauthService.isLoggedIn() && sauthService.isTeacherLoggedIn()"
+       routerLinkActive="router-link-active">Defaulters</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" [routerLink]="['/student-list-admin']" *ngIf="sauthService.isLoggedIn() && sauthService.isAdminLoggedIn()"
          routerLinkActive="router-link-active">Students</a>
       </li>
