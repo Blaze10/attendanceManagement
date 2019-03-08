@@ -68,10 +68,6 @@ export class StudentListComponent implements OnInit {
 
           if (this.sauthService.isAdminLoggedIn()) {
             this.studentList.push(x as Student);
-          } else {
-            if (x['stream'] === this.teacherStream) {
-              this.studentList.push(x as Student);
-            }
           }
         });
         this.filteredStudentList = this.studentList;

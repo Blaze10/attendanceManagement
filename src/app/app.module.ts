@@ -34,6 +34,7 @@ import { ContactListComponent } from './pages/contact-us/contact-list/contact-li
 import { StudentListAdminComponent } from './pages/student/student-list-admin/student-list-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AttendanceDefaultersComponent } from './pages/attendance/attendance-defaulters/attendance-defaulters.component';
+import { EditProfileComponent } from './pages/student/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AttendanceDefaultersComponent } from './pages/attendance/attendance-def
     ContactUsComponent,
     ContactListComponent,
     StudentListAdminComponent,
-    AttendanceDefaultersComponent
+    AttendanceDefaultersComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

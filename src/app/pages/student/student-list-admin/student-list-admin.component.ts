@@ -21,6 +21,7 @@ export class StudentListAdminComponent implements OnInit {
   private _searchYear: string;
   private _searchStream: string;
   filteredStudentList: Student[];
+  teacherStream: string;
   p = 1;
 
   constructor(private router: Router, private studentService: StudentService,
@@ -29,6 +30,14 @@ export class StudentListAdminComponent implements OnInit {
 
   ngOnInit() {
     this.showLoader = true;
+    this.teacherService.getTeacher(localStorage.getItem('userId')).subscribe(
+      ((item: Teacher) => {
+        this.teacherStream = item.stream;
+      }),
+      ((err) => {
+        console.log(err);
+      })
+    );
    this.getAllStudents();
   }
 
@@ -67,7 +76,7 @@ export class StudentListAdminComponent implements OnInit {
           const x = element.payload.toJSON();
           x['$key'] = element.key;
 
-          if (this.sauthService.isAdminLoggedIn()) {
+          if (x['stream'] === this.teacherStream) {
             this.studentList.push(x as Student);
           }
           this.filteredStudentList = this.studentList;

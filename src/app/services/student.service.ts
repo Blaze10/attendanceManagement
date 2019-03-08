@@ -31,6 +31,12 @@ updateStudent(student) {
   return this.studentList.update(key, student);
 }
 
+updateStudentPassword(student: Student) {
+  const key = student.$key;
+  delete student.$key;
+  return this.studentList.update(key, student);
+}
+
 deleteStudent(key) {
   return this.studentList.remove(key);
 }

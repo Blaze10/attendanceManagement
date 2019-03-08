@@ -1,6 +1,6 @@
 import { AlertifyService } from './../services/alertify.service';
 import { StudentAuthService } from './../services/student-auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, DoCheck {
   username;
   constructor(public sauthService: StudentAuthService, private router: Router,
       private alertify: AlertifyService) {
@@ -16,6 +16,10 @@ export class SideNavComponent implements OnInit {
        }
 
   ngOnInit() {
+    this.username = localStorage.getItem('name');
+  }
+
+  ngDoCheck() {
     this.username = localStorage.getItem('name');
   }
 

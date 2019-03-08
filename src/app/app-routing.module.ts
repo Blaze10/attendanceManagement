@@ -1,3 +1,4 @@
+import { EditProfileComponent } from './pages/student/edit-profile/edit-profile.component';
 import { ContactListComponent } from './pages/contact-us/contact-list/contact-list.component';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { AboutComponent } from './pages/about/about.component';
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     path: '',
     canActivateChild: [StudentAuthGuard],
     children: [
-      {path: 'myAttendance', component: MyAttendanceComponent}
+      {path: 'myAttendance', component: MyAttendanceComponent},
+      {path: 'editProfile', component: EditProfileComponent}
     ]
   },
   {
@@ -48,18 +50,18 @@ const appRoutes: Routes = [
       {path: 'teacherCreate', component: TeacherCreateComponent},
       {path: 'teacherCreate/:id', component: TeacherCreateComponent},
       {path: 'contactList', component: ContactListComponent},
-      {path: 'student-list-admin', component: StudentListAdminComponent}
+      {path: 'studentList', component: StudentListComponent},
+      {path: 'studentCreate', component: StudentCreateComponent},
+      {path: 'studentCreate/:id', component: StudentCreateComponent},
     ]
   },
   {
     path: '',
     canActivateChild: [TeacherAuthGuard],
     children: [
-      {path: 'studentList', component: StudentListComponent},
-      {path: 'studentCreate', component: StudentCreateComponent},
-      {path: 'studentCreate/:id', component: StudentCreateComponent},
       {path: 'fillAttendance', component: AttendanceFillComponent},
-      {path: 'defaulters', component: AttendanceDefaultersComponent}
+      {path: 'defaulters', component: AttendanceDefaultersComponent},
+      {path: 'student-list-admin', component: StudentListAdminComponent}
     ]
   }
 ];
